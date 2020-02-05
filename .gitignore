@@ -1,0 +1,7 @@
+# Environments
+venv/
+libraryenv/
+
+requirements.txt
+
+.DS_store

@@ -1,7 +1,11 @@
 # Environments
-venv/
+
 libraryenv/
 
 requirements.txt
 
-.DS_store
+.DS_Store
+
+*.pyo
+
+*.pyc

@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
                 ('isbn_number', models.CharField(max_length=50)),
                 ('author', models.CharField(max_length=50)),
                 ('year', models.IntegerField()),
-                ('librarian', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='libraryapp.Librarian')),
+                # ('librarian', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='libraryapp.Librarian')),
                 ('location', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='libraryapp.Library')),
             ],
         ),

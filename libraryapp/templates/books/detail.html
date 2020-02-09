@@ -1,0 +1,16 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <charset = 'utf-8'>
+        <title>NMLS</title>
+    </head>
+    <body>
+        <h1>{{book.title}}</h1>
+        <h2>By {{book.author}} </h2>
+
+        <div>Published in {{book.year}}</div>
+        <div>ISBN: {{book.isbn_number}}</div>
+    </body>
+</html>

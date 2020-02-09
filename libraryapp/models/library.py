@@ -2,8 +2,8 @@ from django.db import models
 
 class Library(models.Model):
 
-    title = models.CharField(max_length=50)
-    address = models.CharField(max_length = 50)
+    title = models.CharField(max_length=50, null=False)
+    address = models.CharField(max_length = 50, null=False)
     
     class Meta:
         verbose_name = ("library")

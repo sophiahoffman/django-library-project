@@ -14,5 +14,6 @@ urlpatterns = [
     path('library/form', library_form, name='library_form'),
     path('books/<int:book_id>/', book_details, name='book'),
     path('librarians/<int:librarian_id>', librarian_details, name = 'librarian'),
-    path('libraries/<int:library_id>', library_details, name='library')
+    path('libraries/<int:library_id>', library_details, name='library'),
+    path('books/<int:book_id>/form/', book_edit_form, name='book_edit_form')
 ]

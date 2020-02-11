@@ -1,3 +1,5 @@
+{% extends 'shared/base.html' %}
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -7,6 +9,7 @@
         <title>Library</title>
     </head>
     <body>
+    {% block content %}
         <h1>Librarians</h1>
 
         <ol>
@@ -15,5 +18,6 @@
                 {{librarian.id}} {{librarian.user_id}} {{librarian.first_name}} {{librarian.last_name}}</a></li>
         {% endfor %}
         </ol>
+    {% endblock %}
     </body>
 </html>

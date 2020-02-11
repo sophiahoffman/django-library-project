@@ -1,29 +1,38 @@
 import sqlite3
 from ..connection import Connection
-from libraryapp.models import Library
+from libraryapp.models import Library, Book
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
 def library_list(request):
     if request.method == "GET":
         with sqlite3.connect(Connection.db_path) as conn:
-            conn.row_factory = sqlite3.Row
+            conn.row_factory = create_library
 
             db_cursor = conn.cursor()
 
             db_cursor.execute("""
-            SELECT id, title, address
-            FROM libraryapp_library
+            SELECT li.id,
+            li.title, 
+            li.address,
+            b.id book_id,
+            b.title book_title,
+            b.author,
+            b.year,
+            b.isbn_number
+            FROM libraryapp_library li, libraryapp_book b
+            ON li.id = b.location_id
             """)
-
             all_libraries = []
-            dataset = db_cursor.fetchall()
+            library_groups = {}
+            libraries = db_cursor.fetchall()
 
-            for row in dataset:
-                library = Library()
-                library.id=row['id']
-                library.title = row['title']
-                library.address = row['address']
+            for (library, book) in libraries:
+                if library.id not in library_groups:
+                    library_groups[library.id] = library
+                    library_groups[library.id].books.append(book)
+                else:
+                    library_groups[library.id].books.append(book)
 
                 all_libraries.append(library)
 
@@ -43,4 +52,24 @@ def library_list(request):
             (form_data['title'], form_data['address'])
             )
         return redirect(reverse('libraryapp:libraries'))
+
+def create_library(cursor, row):
+    _row = sqlite3.Row(cursor, row)
+
+    library = Library()
+    library.id = _row["id"]
+    library.title = _row["title"]
+    library.address = _row["address"]
+
+    library.books = []
+
+    book = Book()
+    book.id = _row["id"]
+    book.title = _row["book_title"]
+    book.author = _row["author"]
+    book.isbn_number = _row["isbn_number"]
+    book.year = _row["year"]
+
+    return (library, book, )
+
 

@@ -1,3 +1,6 @@
+
+{% extends 'shared/base.html' %}
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -7,9 +10,11 @@
         <title>NMLS</title>
     </head>
     <body>
+    {% block content %}
         <h1>{{librarian.first_name}} {{librarian.last_name}}</h1>
         <h2>Works at {{librarian.title}} </h2>
         <div>Address {{librarian.address}}</div>
+    {% endblock %}
     </body>
 
 </html>
